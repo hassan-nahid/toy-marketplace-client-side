@@ -10,7 +10,9 @@ const Main = () => {
         <div>
             <AuthContextProvider>
                 <NavBar></NavBar>
-                <Outlet></Outlet>
+                <div className="mx-auto max-w-screen-xl">
+                    <Outlet></Outlet>
+                </div>
                 <Footer></Footer>
             </AuthContextProvider>
         </div>
