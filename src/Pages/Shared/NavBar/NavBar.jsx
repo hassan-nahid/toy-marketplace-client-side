@@ -1,6 +1,16 @@
 import { Link } from "react-router-dom";
+import { UserAuth } from "../../../provider/AuthContext";
 
 const NavBar = () => {
+    const { user, logOut } = UserAuth();
+    const handleSignOut = async () => {
+        try {
+            await logOut()
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <div className="navbar bg-red-600">
             <div className="navbar-start">
@@ -28,7 +38,12 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to="/login"><a className="btn text-red-500">Login</a></Link>
+                {
+                    user ? <h1 className="flex">
+                        <button onClick={handleSignOut} className='btn text-red-600'>LogOut</button>
+                        <img className='w-12 mx-2 rounded-full' src={user.photoURL} alt="" title={user.displayName} /></h1>
+                        : <Link to="login"><button className='btn text-red-600'>Login</button></Link>
+                }
             </div>
         </div>
     );
