@@ -20,16 +20,16 @@ const NavBar = () => {
                     </label>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-red-100 rounded-box w-52">
                         <Link to="/"><li><a>Home</a></li></Link>
-                        <Link to="/blog"><li><a>All Toys</a></li></Link>
+                        <Link to="/alltoy"><li><a>All Toys</a></li></Link>
                         {
-                            user ? <Link to="/blog"><li><a>My Toys</a></li></Link>
+                            user ? <Link to="/mytoy"><li><a>My Toys</a></li></Link>
                                 : <></>
                         }
                         {
-                            user ? <Link to="/blog"><li><a>Add A Toys</a></li></Link>
+                            user ? <Link to="/addatoy"><li><a>Add A Toys</a></li></Link>
                                 : <></>
                         }
-                        <Link to="/blog"><li><a>Blogs</a></li></Link>
+                        <Link to="/blogs"><li><a>Blogs</a></li></Link>
                     </ul>
                 </div>
                 <a className="text-white font-bold text-xl">ABC TOYS</a>
@@ -37,16 +37,16 @@ const NavBar = () => {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     <Link className="text-white" to="/"><li><a>Home</a></li></Link>
-                    <Link className="text-white" to="/blog"><li><a>All Toys</a></li></Link>
+                    <Link className="text-white" to="/alltoy"><li><a>All Toys</a></li></Link>
                     {
-                        user ? <Link className="text-white" to="/blog"><li><a>My Toys</a></li></Link>
+                        user ? <Link className="text-white" to="/mytoy"><li><a>My Toys</a></li></Link>
                             : <></>
                     }
                     {
-                        user ? <Link className="text-white" to="/blog"><li><a>Add A Toys</a></li></Link>
+                        user ? <Link className="text-white" to="/addatoy"><li><a>Add A Toys</a></li></Link>
                             : <></>
                     }
-                    <Link className="text-white" to="/blog"><li><a>Blogs</a></li></Link>
+                    <Link className="text-white" to="/blogs"><li><a>Blogs</a></li></Link>
                 </ul>
             </div>
             <div className="navbar-end">
