@@ -10,7 +10,7 @@ const RetailPartners = () => {
 
     return (
         <div className="my-24 mx-4" data-aos="fade-up">
-            <h1 className="text-center text-3xl font-semibold my-4">Retail Partners</h1>
+            <h1 className="text-center text-3xl font-semibold my-4 text-red-600">Retail Partners</h1>
             <div className="flex justify-between flex-wrap mx-auto">
                 <img className="w-36 h-36" src="https://images-platform.99static.com//g-pg-7A5KCg_Wn3iD7SYkwKL0qk=/0x0:1182x1182/fit-in/500x500/99designs-contests-attachments/80/80402/attachment_80402256" alt="" />
                 <img className="w-36 h-36" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSot2E9MkSyQa1iOtt3ZbS_7D-H_J4WgGIltg&usqp=CAU" alt="" />

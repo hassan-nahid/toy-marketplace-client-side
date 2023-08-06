@@ -33,7 +33,7 @@ const ReactTabs = () => {
 
     return (
         <div className="my-10" data-aos="flip-right">
-            <h2 className="text-3xl font-semibold text-center my-4">Category</h2>
+            <h2 className="text-3xl font-semibold text-center my-4 text-red-600">Category</h2>
             <Tabs>
                 <TabList>
                     {filteredCategories.map((category) => (

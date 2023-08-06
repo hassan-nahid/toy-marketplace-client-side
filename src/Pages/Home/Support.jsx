@@ -10,7 +10,7 @@ const Support = () => {
 
     return (
         <div className="my-4" data-aos="fade-down">
-            <h1 className="text-center text-3xl font-semibold my-4">Support</h1>
+            <h1 className="text-center text-3xl font-semibold my-4 text-red-600">Support</h1>
             <div className="bg-red-600 flex justify-between flex-wrap p-4">
                 <div className="flex flex-col justify-center items-center">
                     <img src="https://i0.wp.com/abctoysbd.com/wp-content/uploads/2022/05/delivery-xxl-50x50-1.png?fit=50%2C50&ssl=1" alt="" />

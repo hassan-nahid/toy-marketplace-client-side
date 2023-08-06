@@ -10,7 +10,7 @@ const Gallery = () => {
     },[]);
     return (
         <div data-aos="fade-up">
-            <h2 className="text-3xl text-center font-semibold mt-10 mb-4">Gallery</h2>
+            <h2 className="text-3xl text-center font-semibold mt-10 mb-4 text-red-600">Gallery</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {/* Place your images here */}
                 <img
