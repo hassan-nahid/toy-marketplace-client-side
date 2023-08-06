@@ -1,46 +1,132 @@
-{
-  "_id": {
-    "$oid": "64cfa3cac2452a0791b3e84a"
+[
+  {
+    "subCategory": "Sports Car",
+    "picture": "https://static-01.daraz.com.bd/p/3d05063f0bdf4e52336faacbc54d50cc.jpg",
+    "toyName": "SuperSpeed Sports Car",
+    "seller": {
+      "name": "SpeedRacers",
+      "email": "speedracers@example.com"
+    },
+    "price": 60,
+    "rating": 4.9,
+    "availableQuantity": 10,
+    "description": "A sleek and fast sports car toy for thrilling racing adventures."
   },
-  "name": "Race Car",
-  "subcategories": [
-    {
-      "toys": [
-        {
-          "id": "1",
-          "toyName": "Formula One",
-          "picture": "https://m.media-amazon.com/images/I/71uxuU0LEzL._AC_UF1000,1000_QL80_.jpg",
-          "seller": "SpeedMaster",
-          "sellerEmail": "speedmaster@example.com",
-          "price": {
-            "$numberInt": "28"
-          },
-          "rating": {
-            "$numberDouble": "4.5"
-          },
-          "availableQuantity": {
-            "$numberInt": "10"
-          },
-          "description": "A realistic race car inspired by Formula One."
-        },
-        {
-          "id": "2",
-          "toyName": "Dragster",
-          "picture": "https://www.harborfreight.com/media/catalog/product/cache/9fc4a8332f9638515cd199dd0f9238da/5/6/56537_W3.jpg",
-          "seller": "SpeedDemon",
-          "sellerEmail": "speeddemon@example.com",
-          "price": {
-            "$numberInt": "32"
-          },
-          "rating": {
-            "$numberDouble": "4.9"
-          },
-          "availableQuantity": {
-            "$numberInt": "5"
-          },
-          "description": "A speedy dragster for thrilling drag racing."
-        }
-      ]
-    }
-  ]
-}
+  {
+    "subCategory": "Truck",
+    "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBboreEMvKAcBgFcQfkRHoIhVFM9O8ISfY6bjtASOoTA&s",
+    "toyName": "Mega Hauler Truck",
+    "seller": {
+      "name": "TruckMasters",
+      "email": "truckmasters@example.com"
+    },
+    "price": 35,
+    "rating": 4.6,
+    "availableQuantity": 15,
+    "description": "A heavy-duty truck toy with multiple compartments for carrying smaller vehicles."
+  },
+  {
+    "subCategory": "Race Car",
+    "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQri0r_OTELdOdm7DbMxMU9LpJpxvwzjSOL4_H92vY_Ew&s",
+    "toyName": "Turbocharged Race Car",
+    "seller": {
+      "name": "RaceMasters",
+      "email": "racemasters@example.com"
+    },
+    "price": 40,
+    "rating": 4.7,
+    "availableQuantity": 12,
+    "description": "A high-speed race car toy designed for thrilling competitions."
+  },
+  {
+    "subCategory": "Sports Car",
+    "picture": "https://rukminim2.flixcart.com/image/850/1000/jmz7csw0/remote-control-toy/g/c/z/super-car-toys-original-imaf9rfjmjwyeam6.jpeg?q=90",
+    "toyName": "TurboCharge GT",
+    "seller": {
+      "name": "SpeedRacers",
+      "email": "speedracers@example.com"
+    },
+    "price": 65,
+    "rating": 4.8,
+    "availableQuantity": 8,
+    "description": "An ultra-modern sports car toy with incredible speed and style."
+  },
+  {
+    "subCategory": "Truck",
+    "picture": "https://media.istockphoto.com/id/120758576/photo/color-toy-car.jpg?s=612x612&w=0&k=20&c=ZBsd6JPQ3uuNGpnSDTU1OWtEVNv01tW-YZ4Is7gsno4=",
+    "toyName": "Off-Road Adventure Truck",
+    "seller": {
+      "name": "AdventureToys",
+      "email": "adventuretoys@example.com"
+    },
+    "price": 45,
+    "rating": 4.5,
+    "availableQuantity": 20,
+    "description": "An off-road truck toy for exciting outdoor exploration."
+  },
+  {
+    "subCategory": "Race Car",
+    "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyIhmmyGffQ--2H9yMkz_HV-hGSO3Fhur9XWyMYrU&s",
+    "toyName": "Nitro Boost Race Car",
+    "seller": {
+      "name": "SpeedBoosters",
+      "email": "speedboosters@example.com"
+    },
+    "price": 55,
+    "rating": 4.9,
+    "availableQuantity": 10,
+    "description": "A race car toy with nitro boost feature for lightning-fast acceleration."
+  },
+  {
+    "subCategory": "Sports Car",
+    "picture": "https://ae01.alicdn.com/kf/Ha6506b28e7374eee9e1c119004293dd4s/Car-Model-1-32-Supercar-Toy-Car-Bugatti-DIVO-Sports-Cars-Model-Alloy-Diecast-Sound-Light.jpg",
+    "toyName": "Turbo X Sports Car",
+    "seller": {
+      "name": "SpeedRacers",
+      "email": "speedracers@example.com"
+    },
+    "price": 55,
+    "rating": 4.7,
+    "availableQuantity": 15,
+    "description": "A powerful and stylish sports car toy built for speed enthusiasts."
+  },
+  {
+    "subCategory": "Truck",
+    "picture": "https://static1.squarespace.com/static/6065e6c3fc8cef4984d55a5a/6065e6e437b77d2f4ca0eb60/61707c57e964683d38c8d6df/1634761857913/super+truck+edit_01.png?format=1500w",
+    "toyName": "Monster Hauler Truck",
+    "seller": {
+      "name": "TruckMasters",
+      "email": "truckmasters@example.com"
+    },
+    "price": 50,
+    "rating": 4.8,
+    "availableQuantity": 10,
+    "description": "A monster truck toy with massive wheels and tough design for rough terrains."
+  },
+  {
+    "subCategory": "Race Car",
+    "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvVlyETcm7zF5RJ05fvk_hp7wlNzRirseFjA&usqp=CAU",
+    "toyName": "Lightning Sprint Race Car",
+    "seller": {
+      "name": "RaceMasters",
+      "email": "racemasters@example.com"
+    },
+    "price": 48,
+    "rating": 4.6,
+    "availableQuantity": 18,
+    "description": "A compact and agile race car toy designed for lightning-fast sprints."
+  },
+  {
+    "subCategory": "Sports Car",
+    "picture": "https://ae01.alicdn.com/kf/Sc55ca08832ff4355b74bbe1fa8f39a8dU/JACKIEKIM-Diecast-Toy-Model-1-32-Scale-Audi-A8L-Super-Car-Doors-Openable-Sound-Light-Educational.jpg",
+    "toyName": "Luxe Sports Convertible",
+    "seller": {
+      "name": "SpeedRacers",
+      "email": "speedracers@example.com"
+    },
+    "price": 70,
+    "rating": 4.9,
+    "availableQuantity": 7,
+    "description": "A luxurious sports car toy with a convertible top for cruising in style."
+  }
+]

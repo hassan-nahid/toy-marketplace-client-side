@@ -3,7 +3,7 @@ import ReactStars from "react-rating-stars-component";
 
 const ViewSingleToy = () => {
     const categories = useLoaderData();
-    const { toyName, id, picture, seller, sellerEmail, price, rating, availableQuantity, description } = categories;
+    const { toyName,  picture, seller, sellerEmail, price, rating, availableQuantity, description,subCategory } = categories;
 
     return (
         <div className="my-8 flex flex-col md:flex-row lg:flex-row justify-center gap-5 items-center">
@@ -16,6 +16,7 @@ const ViewSingleToy = () => {
                 <h1 className="font-semibold">Seller Name: {seller}</h1>
                 <h1 className="font-semibold">Seller Email: {sellerEmail}</h1>
                 <h3 className="font-semibold">Available Quantity: {availableQuantity}</h3>
+                <h3 className="font-semibold">Category: {subCategory}</h3>
                 <h2 className="font-semibold mb-2">{description}</h2>
                 <div className="flex items-center">
                     <ReactStars
@@ -25,9 +26,6 @@ const ViewSingleToy = () => {
                         activeColor="#ffd700"
                     />
                     <p className="mt-1 pl-1">{rating}</p>
-                </div>
-                <div>
-                    <button className="btn btn-outline btn-error my-2">Add Toy</button>
                 </div>
             </div>
         </div>
