@@ -27,7 +27,7 @@ const ViewSingleToy = () => {
                     <p className="mt-1 pl-1">{rating}</p>
                 </div>
                 <div>
-                    <button className="btn">Add</button>
+                    <button className="btn btn-outline btn-error my-2">Add Toy</button>
                 </div>
             </div>
         </div>

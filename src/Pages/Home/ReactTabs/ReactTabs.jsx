@@ -1,13 +1,17 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import ReactStars from 'react-rating-stars-component';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { UserAuth } from '../../../provider/AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ReactTabs = () => {
     const [data, setData] = useState(null);
+    const { user } = UserAuth();
 
     useEffect(() => {
         // Fetch the data from category.json or your server API
@@ -45,7 +49,10 @@ const ReactTabs = () => {
                     <TabPanel key={category.name}>
                         <div className="p-4">
                             {category.subcategories.map((subcategory) => (
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mx-auto" key={subcategory.toys[0].id}>
+                                <div
+                                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mx-auto"
+                                    key={subcategory.toys[0].id}
+                                >
                                     {subcategory.toys.map((toy) => (
                                         <div key={toy.id} className="border p-4 rounded-lg w-full">
                                             <img src={toy.picture} alt={toy.toyName} className="w-full h-48 object-cover mb-4" />
@@ -64,7 +71,16 @@ const ReactTabs = () => {
                                                 <span className="ml-2">{toy.rating}</span>
                                             </div>
                                             <Link to={`/viewsingletoy/${toy.id}`}>
-                                                <button className="btn btn-outline btn-error my-2">View Details</button>
+                                                <button
+                                                    className="btn btn-outline btn-error my-2"
+                                                    onClick={() => {
+                                                        if (!user) {
+                                                            toast.error('You have to log in first to view details');
+                                                        }
+                                                    }}
+                                                >
+                                                    View Details
+                                                </button>
                                             </Link>
                                         </div>
                                     ))}
@@ -74,6 +90,7 @@ const ReactTabs = () => {
                     </TabPanel>
                 ))}
             </Tabs>
+            <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
         </div>
     );
 };
