@@ -45,7 +45,7 @@ const ReactTabs = () => {
                     <TabPanel key={category.name}>
                         <div className="p-4">
                             {category.subcategories.map((subcategory) => (
-                                <div className="grid grid-cols-3 gap-3 mx-auto" key={subcategory.toys[0].id}>
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mx-auto" key={subcategory.toys[0].id}>
                                     {subcategory.toys.map((toy) => (
                                         <div key={toy.id} className="border p-4 rounded-lg w-full">
                                             <img src={toy.picture} alt={toy.toyName} className="w-full h-48 object-cover mb-4" />
