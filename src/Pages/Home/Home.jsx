@@ -1,10 +1,13 @@
 import Banner from "./Banner";
+import Gallery from "./Gallery";
+import ReactTabs from "./ReactTabs/ReactTabs";
 
 const Home = () => {
     return (
         <div>
             <Banner></Banner>
-            <h2 className="text-center">this is home</h2>
+            <Gallery></Gallery>
+            <ReactTabs></ReactTabs>
         </div>
     );
 };

@@ -1,6 +1,7 @@
+
 const Banner = () => {
     return (
-      <div className="relative my-6">
+      <div className="relative my-9">
         <img
           className="w-full max-h-96 rounded-lg"
           src="cars-toy.jpg"
