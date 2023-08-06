@@ -4,6 +4,7 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Registar/Registar";
+import ViewSingleToy from "../Pages/Home/ReactTabs/ViewSingleToy";
 
 
 
@@ -26,6 +27,11 @@ const router = createBrowserRouter([
       {
         path:'register',
         element:<Register></Register>,
+      },
+      {
+        path:'viewsingletoy/:id',
+        element:<ViewSingleToy></ViewSingleToy>,
+        loader: ({params}) => fetch(`http://localhost:5000/categories/${params.id}`)
       },
     ]
   },

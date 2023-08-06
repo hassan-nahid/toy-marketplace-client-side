@@ -1,92 +1,44 @@
 {
-  "categories": [
+  "_id": {
+    "$oid": "64cfa3cac2452a0791b3e84a"
+  },
+  "name": "Race Car",
+  "subcategories": [
     {
-      "name": "Race Car",
-      "subcategories": [
+      "toys": [
         {
-          "name": "Formula One",
-          "toys": [
-            {
-              "id": 1,
-              "name": "Formula One",
-              "picture": "https://m.media-amazon.com/images/I/71uxuU0LEzL._AC_UF1000,1000_QL80_.jpg",
-              "price": 28,
-              "rating": 4.5,
-              "brand": "SpeedMaster",
-              "description": "A realistic race car inspired by Formula One.",
-              "inStock": true
-            },
-            {
-              "id": 2,
-              "name": "Dragster",
-              "picture": "https://www.harborfreight.com/media/catalog/product/cache/9fc4a8332f9638515cd199dd0f9238da/5/6/56537_W3.jpg",
-              "price": 32,
-              "rating": 4.9,
-              "brand": "SpeedDemon",
-              "description": "A speedy dragster for thrilling drag racing.",
-              "inStock": true
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Truck",
-      "subcategories": [
+          "id": "1",
+          "toyName": "Formula One",
+          "picture": "https://m.media-amazon.com/images/I/71uxuU0LEzL._AC_UF1000,1000_QL80_.jpg",
+          "seller": "SpeedMaster",
+          "sellerEmail": "speedmaster@example.com",
+          "price": {
+            "$numberInt": "28"
+          },
+          "rating": {
+            "$numberDouble": "4.5"
+          },
+          "availableQuantity": {
+            "$numberInt": "10"
+          },
+          "description": "A realistic race car inspired by Formula One."
+        },
         {
-          "name": "Monster Hauler",
-          "toys": [
-            {
-              "id": 3,
-              "name": "Monster Hauler",
-              "picture": "https://static-01.daraz.com.bd/p/9efcfb51dbd361bac09a8a65da02407e.jpg",
-              "price": 20,
-              "rating": 4.4,
-              "brand": "MegaTrux",
-              "description": "A rugged and powerful monster truck for off-road adventures.",
-              "inStock": true
-            },
-            {
-              "id": 4,
-              "name": "Heavy Duty Transporter",
-              "picture": "https://drivenbybattat.com/wp-content/uploads/WH1000_pr.jpg",
-              "price": 22,
-              "rating": 4.2,
-              "brand": "ToughHaul",
-              "description": "A heavy-duty truck for carrying cargo around the city.",
-              "inStock": true
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Sports Car",
-      "subcategories": [
-        {
-          "name": "Super Racer",
-          "toys": [
-            {
-              "id": 5,
-              "name": "Super Racer",
-              "picture": "https://www.mightymoms.club/review/wp-content/uploads/2022/08/Best-Choice-mighty-moms.jpg",
-              "price": 25,
-              "rating": 4.6,
-              "brand": "Speedster",
-              "description": "An ultra-fast sports car with sleek design.",
-              "inStock": true
-            },
-            {
-              "id": 6,
-              "name": "Turbo Charger",
-              "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiPiGKjFMwycI-4gvUAo4rQjl8disxCekNcw&usqp=CAU",
-              "price": 30,
-              "rating": 4.8,
-              "brand": "NitroSpeed",
-              "description": "A high-performance sports car for racing enthusiasts.",
-              "inStock": true
-            }
-          ]
+          "id": "2",
+          "toyName": "Dragster",
+          "picture": "https://www.harborfreight.com/media/catalog/product/cache/9fc4a8332f9638515cd199dd0f9238da/5/6/56537_W3.jpg",
+          "seller": "SpeedDemon",
+          "sellerEmail": "speeddemon@example.com",
+          "price": {
+            "$numberInt": "32"
+          },
+          "rating": {
+            "$numberDouble": "4.9"
+          },
+          "availableQuantity": {
+            "$numberInt": "5"
+          },
+          "description": "A speedy dragster for thrilling drag racing."
         }
       ]
     }
