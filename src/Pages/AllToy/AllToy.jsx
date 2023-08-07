@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import { Link, useLoaderData } from "react-router-dom";
 
 const AllToy = () => {
@@ -18,6 +19,10 @@ const AllToy = () => {
 
     return (
         <div className="p-4 my-2">
+               <Helmet>
+                <meta charSet="utf-8" />
+                <title>ABC TOYS | All TOy</title>
+            </Helmet>
             {/* Search input */}
             <input
                 type="text"

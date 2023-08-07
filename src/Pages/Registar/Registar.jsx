@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { UserAuth } from '../../provider/AuthContext';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const Register = () => {
     const { emailSignUp, error } = UserAuth();
@@ -44,6 +45,10 @@ const Register = () => {
 
     return (
         <div>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>ABC TOYS | Register</title>
+            </Helmet>
             <div className="hero min-h-screen bg-base-200 py-8">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -107,9 +112,9 @@ const Register = () => {
                                     </button>
                                 </div>
                                 <div className='my-4'>
-                                <span className="my-4">
-                                    You Have Already Account <Link className="link link-primary" to="/login">Login</Link>
-                                </span>
+                                    <span className="my-4">
+                                        You Have Already Account <Link className="link link-primary" to="/login">Login</Link>
+                                    </span>
                                 </div>
                             </form>
                             {validationError && <p className="text-red-500 mt-4">{validationError}</p>}

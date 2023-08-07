@@ -2,6 +2,7 @@ import { Link, useLocation, Navigate } from 'react-router-dom';
 import { FaGoogle } from 'react-icons/fa';
 import { UserAuth } from '../../provider/AuthContext';
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 
 const Login = () => {
     const { emailSignIn, googleSignIn, error, user } = UserAuth();
@@ -36,6 +37,10 @@ const Login = () => {
     return (
         <div>
             <div className="hero min-h-screen bg-base-200 py-8">
+                <Helmet>
+                    <meta charSet="utf-8" />
+                    <title>ABC TOYS | Login</title>
+                </Helmet>
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                         <div className="card-body">
@@ -68,7 +73,7 @@ const Login = () => {
                                     className="input input-bordered"
                                 />
                                 <span className="my-3">
-                                    
+
                                     Do not Have an Account <Link className="link link-primary" to="/register">Register</Link>
                                 </span>
                             </div>

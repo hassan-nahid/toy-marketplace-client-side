@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UserAuth } from '../../provider/AuthContext';
+import { Helmet } from 'react-helmet';
 
 const AddAToy = () => {
     const [pictureUrl, setPictureUrl] = useState('');
@@ -88,7 +89,11 @@ const AddAToy = () => {
 
     return (
         <div className="container mx-auto p-4">
-            <h2 className="text-2xl font-bold mb-4">Add A Toy</h2>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>ABC TOYS | Add A Toy</title>
+            </Helmet>
+            <h2 className="text-3xl font-Semibold text-center text-red-600 my-4">Add A Toy</h2>
             <form onSubmit={handleSubmit} className="max-w-md mx-auto">
                 <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700">Toy Name:</label>
