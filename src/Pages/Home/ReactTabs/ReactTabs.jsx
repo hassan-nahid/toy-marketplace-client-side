@@ -15,7 +15,7 @@ const ReactTabs = () => {
 
     useEffect(() => {
         // Fetch the data from category.json or your server API
-        fetch('http://localhost:5000/categories')
+        fetch('https://toy-marketplace-server-one-livid.vercel.app/categories')
             .then((response) => response.json())
             .then((data) => setData(data))
             .catch((error) => console.error('Error fetching data:', error));
