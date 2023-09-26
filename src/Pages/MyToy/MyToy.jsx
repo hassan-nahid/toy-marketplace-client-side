@@ -25,7 +25,7 @@ const MyToy = () => {
     const handleDelete = id => {
         const proceed = window.confirm("Are you sure you want to delete?");
         if (proceed) {
-            fetch(`https://toy-marketplace-server-one-livid.vercel.app/allnewtoys/${id}`, {
+            fetch(`https://toy-marketplace-server-seven-mu.vercel.app/allnewtoys/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())

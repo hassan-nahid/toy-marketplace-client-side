@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       {
         path:'viewsingletoy/:id',
         element:<PrivateRoute><ViewSingleToy></ViewSingleToy></PrivateRoute>,
-        loader: ({params}) => fetch(`https://toy-marketplace-server-one-livid.vercel.app/categories/${params.id}`)
+        loader: ({params}) => fetch(`https://toy-marketplace-server-seven-mu.vercel.app/categories/${params.id}`)
       },
       {
         path:'blogs',
@@ -50,17 +50,17 @@ const router = createBrowserRouter([
       {
         path:'mytoy',
         element:<MyToy></MyToy>,
-        loader: () => fetch('https://toy-marketplace-server-one-livid.vercel.app/allnewtoys')
+        loader: () => fetch('https://toy-marketplace-server-seven-mu.vercel.app/allnewtoys')
       },
       {
         path:'alltoy',
         element:<AllToy></AllToy>,
-        loader: () => fetch('https://toy-marketplace-server-one-livid.vercel.app/alltoys')
+        loader: () => fetch('https://toy-marketplace-server-seven-mu.vercel.app/alltoys')
       },
       {
         path:'singletoy/:id',
         element:<PrivateRoute><SingleToy></SingleToy></PrivateRoute>,
-        loader: ({params}) => fetch(`https://toy-marketplace-server-one-livid.vercel.app/alltoys/${params.id}`)
+        loader: ({params}) => fetch(`https://toy-marketplace-server-seven-mu.vercel.app/alltoys/${params.id}`)
       },
     ]
   },
