@@ -1,6 +1,7 @@
 import ReactStars from "react-rating-stars-component";
 
 const SIngleToyCard = ({ allToy }) => {
+
     const { toyName, picture, seller, price, rating, availableQuantity, description, subCategory } = allToy;
     console.log(allToy)
     return (
@@ -11,8 +12,8 @@ const SIngleToyCard = ({ allToy }) => {
             <div className="w-full lg:w-[50%] p-4 border">
                 <h2 className="text-red-600 text-xl font-semibold">Toy Name:{toyName}</h2>
                 <p className="font-semibold my-2 text-yellow-700">Price: ${price}</p>
-                <h1 className="font-semibold">Seller Name: {seller.name}</h1>
-                <h1 className="font-semibold">Seller Email: {seller.email}</h1>
+                <h1 className="font-semibold">Seller Name: {seller?.name}</h1>
+                <h1 className="font-semibold">Seller Email: {seller?.email}</h1>
                 <h3 className="font-semibold">Available Quantity: {availableQuantity}</h3>
                 <h3 className="font-semibold">Category: {subCategory}</h3>
                 <h2 className="font-semibold mb-2">{description}</h2>

@@ -19,10 +19,11 @@ const AllToy = () => {
 
     return (
         <div className="p-4 my-2">
-               <Helmet>
+            <Helmet>
                 <meta charSet="utf-8" />
-                <title>ABC TOYS | All TOy</title>
+                <title>ABC TOYS | All TOY</title>
             </Helmet>
+
             {/* Search input */}
             <input
                 type="text"
@@ -32,47 +33,33 @@ const AllToy = () => {
                 className="px-4 py-2 mb-4 w-full rounded-md border border-gray-300"
             />
 
-            {/* All Toys table */}
-            <div className="overflow-x-auto">
-                <table className="w-full border-collapse">
-                    <thead>
-                        <tr className="bg-gray-200 text-gray-700">
-                            <th className="px-4 py-2 hidden sm:table-cell">Seller</th>
-                            <th className="px-4 py-2">Toy Name</th>
-                            <th className="px-4 py-2 hidden sm:table-cell">Sub-category</th>
-                            <th className="px-4 py-2 hidden sm:table-cell">Price</th>
-                            <th className="px-4 py-2 hidden sm:table-cell">
-                                Available Quantity
-                            </th>
-                            <th className="px-4 py-2">View Details</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredToys.slice(0, limit).map((allToy) => (
-                            <tr key={allToy._id} className="border-b border-gray-300">
-                                <td className="px-4 py-2 hidden sm:table-cell">
-                                    {allToy.seller.name}
-                                </td>
-                                <td className="px-4 py-2">{allToy.toyName}</td>
-                                <td className="px-4 py-2 hidden sm:table-cell">
-                                    {allToy.subCategory}
-                                </td>
-                                <td className="px-4 py-2 hidden sm:table-cell">
-                                    {allToy.price}
-                                </td>
-                                <td className="px-4 py-2 hidden sm:table-cell">
-                                    {allToy.availableQuantity}
-                                </td>
-                                <td className="px-4 py-2">
-                                    {/* View Details button (you can implement the onClick function here) */}
-                                    <Link to={`/singletoy/${allToy._id}`}><button className="btn btn-outline btn-error px-4 py-2 rounded-md">
+            {/* All Toys cards */}
+            <div className="flex flex-col gap-4 mt-4">
+                {filteredToys.slice(0, limit).map((allToy) => (
+                    <div key={allToy._id} className="card lg:card-side bg-base-100 shadow-xl">
+                        <figure>
+                            <img
+                                src={allToy.picture}
+                                alt={allToy.toyName}
+                                className="w-56 h-56 object-cover"
+                            />
+                        </figure>
+                        <div className="card-body">
+                            <h2 className="card-title">{allToy.toyName}</h2>
+                            <p>Seller: {allToy.seller.name}</p>
+                            <p>Sub-category: {allToy.subCategory}</p>
+                            <p>Price: ${allToy.price}</p>
+                            <p>Available Quantity: {allToy.availableQuantity}</p>
+                            <div className="card-actions justify-end">
+                                <Link to={`/singletoy/${allToy._id}`}>
+                                    <button className="btn btn-outline btn-error">
                                         View Details
-                                    </button></Link>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                                    </button>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
 
             {/* Load more button */}

@@ -4,26 +4,28 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Helmet } from 'react-helmet';
 import auth from '../../firebase/firebase.config';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useLoaderData } from 'react-router-dom';
 
-const AddAToy = () => {
-    const [pictureUrl, setPictureUrl] = useState('');
-    const [name, setName] = useState('');
-    const [subCategory, setSubCategory] = useState('');
-    const [price, setPrice] = useState('');
-    const [rating, setRating] = useState('');
-    const [availableQuantity, setAvailableQuantity] = useState('');
-    const [description, setDescription] = useState('');
+const ToyEdit = () => {
+    const loadData = useLoaderData();
+    const [pictureUrl, setPictureUrl] = useState(loadData[0]?.picture || '');
+    const [name, setName] = useState(loadData[0]?.toyName || '');
+    const [subCategory, setSubCategory] = useState(loadData[0]?.subCategory || '');
+    const [price, setPrice] = useState(loadData[0]?.price || 0);
+    const [rating, setRating] = useState(loadData[0]?.rating || 0);
+    const [availableQuantity, setAvailableQuantity] = useState(loadData[0]?.availableQuantity || 0);
+    const [description, setDescription] = useState(loadData[0]?.description || '');
+    
     const [user] = useAuthState(auth);
     const [categories, setCategories] = useState([]);
 
     const sellerName = user ? user.displayName : name;
     const sellerEmail = user ? user.email : '';
+    console.log(loadData)
 
     useEffect(() => {
-        // Simulating fetching data from category.json
         const fetchData = async () => {
             try {
-                // Assuming your JSON data structure is directly an array of sub-categories
                 const response = await fetch("/category.json");
                 const data = await response.json();
                 setCategories(data);
@@ -31,28 +33,29 @@ const AddAToy = () => {
                 console.error('Error fetching categories:', error);
             }
         };
-
+    
         fetchData();
     }, []);
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         if (!name || !pictureUrl || !subCategory || !price || !rating || !availableQuantity || !description) {
             toast.error('All fields must be filled', {
                 position: toast.POSITION.TOP_CENTER,
             });
             return;
         }
-
+    
         if (rating > 5) {
             toast.error('Rating cannot be more than 5', {
                 position: toast.POSITION.TOP_CENTER,
             });
             return;
         }
-
-        const newToy = {
+    
+        const updatedToy = {
             subCategory,
             picture: pictureUrl,
             toyName: name,
@@ -65,36 +68,24 @@ const AddAToy = () => {
             availableQuantity: Number(availableQuantity),
             description
         };
-
+    
         try {
-            const response = await fetch('http://localhost:5000/addtoy', {
-                method: 'POST',
+            const response = await fetch(`http://localhost:5000/update_toy/${loadData[0]?._id}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     'authorization': `Bearer ${localStorage.getItem('token')}`
-
                 },
-                body: JSON.stringify(newToy),
+                body: JSON.stringify(updatedToy),
             });
-
-
+    
             if (response.ok) {
-                // Clear input fields
-                setPictureUrl('');
-                setName('');
-                setSubCategory('');
-                setPrice('');
-                setRating('');
-                setAvailableQuantity('');
-                setDescription('');
-
-                // Show toast message
-                toast.success('Toy added successfully!', {
+                toast.success('Toy updated successfully!', {
                     position: toast.POSITION.TOP_CENTER,
                 });
             } else {
-                console.error('Error adding toy');
-                toast.error('Error adding toy', {
+                console.error('Error updating toy');
+                toast.error('Error updating toy', {
                     position: toast.POSITION.TOP_CENTER,
                 });
             }
@@ -105,14 +96,14 @@ const AddAToy = () => {
             });
         }
     };
-
+    
     return (
         <div className="container mx-auto p-4">
             <Helmet>
                 <meta charSet="utf-8" />
-                <title>ABC TOYS | Add A Toy</title>
+                <title>Deen Inspire | Edit Toy</title>
             </Helmet>
-            <h2 className="text-3xl font-Semibold text-center text-red-600 my-4">Add A Toy</h2>
+            <h2 className="text-3xl font-Semibold text-center text-red-600 my-4">Edit Toy</h2>
             <form onSubmit={handleSubmit} className="max-w-md mx-auto">
                 <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700">Toy Name:</label>
@@ -166,4 +157,4 @@ const AddAToy = () => {
     );
 };
 
-export default AddAToy;
+export default ToyEdit;

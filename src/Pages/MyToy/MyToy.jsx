@@ -1,49 +1,64 @@
 import { useState, useEffect } from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
-import { UserAuth } from '../../provider/AuthContext';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import auth from '../../firebase/firebase.config';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { toast } from 'react-toastify';
 
 const MyToy = () => {
-    const { user } = UserAuth();
-    const allNewToys = useLoaderData();
-    const [data, setData] = useState([])
-    const [updateStates, setUpdateStates] = useState(() => {
-        const savedUpdateStates = localStorage.getItem('updateStates');
-        return savedUpdateStates ? JSON.parse(savedUpdateStates) : {};
-    });
-    const [sortedByPriceAsc, setSortedByPriceAsc] = useState(true); // Initial sort order
+    const [user] = useAuthState(auth);
+    const [toyData, setData] = useState([]);
 
     useEffect(() => {
-        setData(allNewToys);
-    }, [allNewToys]);
-
-    useEffect(() => {
-        localStorage.setItem('updateStates', JSON.stringify(updateStates));
-    }, [updateStates]);
-
-
-    const handleDelete = id => {
-        const proceed = window.confirm("Are you sure you want to delete?");
-        if (proceed) {
-            fetch(`https://toy-marketplace-server-seven-mu.vercel.app/allnewtoys/${id}`, {
-                method: 'DELETE'
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.deleteCount > 0) {
-                        alert('Delete successful');
-                        const remaining = allNewToys.filter(allNewToy => allNewToy._id !== id)
-                        setData(remaining)
+        if (user?.email) {
+            fetch(`http://localhost:5000/all_toys/${user.email}`)
+                .then(res => {
+                    if (!res.ok) {
+                        throw new Error('Network response was not ok');
                     }
+                    return res.json();
+                })
+                .then(data => {
+                    setData(data);
                 })
                 .catch(error => {
-                    console.error('Delete error:', error);
+                    console.error('Error fetching data:', error);
                 });
         }
-    }
+    }, [user?.email]);
 
 
 
+    const handleDelete = (id) => {
+        fetch(`http://localhost:5000/delete_toy/${id}`, {
+            method: 'DELETE',
+            headers:{
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return res.json();
+            })
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    // Filter the state data to remove the deleted toy
+                    const remaining = toyData.filter(toy => toy._id !== id);
+                    setData(remaining);
+                    toast.success('Toy deleted successfully');
+                } else {
+                    throw new Error('Toy not deleted');
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting toy:', error);
+                toast.error('Error deleting toy');
+            });
+    };
+    
 
     if (!user || !user.email) {
         return (
@@ -55,86 +70,76 @@ const MyToy = () => {
         );
     }
 
-    let sortedToys = [...data]; // Create a copy of the toy list
-
-    if (sortedByPriceAsc) {
-        sortedToys.sort((a, b) => a.price - b.price); // Sort in ascending order
-    } else {
-        sortedToys.sort((a, b) => b.price - a.price); // Sort in descending order
-    }
-
-    const handleUpdateClick = (toyId) => {
-        setUpdateStates(prevStates => ({
-            ...prevStates,
-            [toyId]: true
-        }));
-    };
-
-    const toggleSortOrder = () => {
-        setSortedByPriceAsc(prevValue => !prevValue);
-    };
-
     return (
-        <div className="p-4">
+        <div className="p-4 w-full">
             <Helmet>
                 <meta charSet="utf-8" />
-                <title>ABC TOYS | My Toys</title>
+                <title>Deen Inspire | My Toys</title>
             </Helmet>
             <h1 className="text-3xl font-semibold text-center text-red-600 my-4">My Toys</h1>
-            <div className="overflow-x-auto">
-                <div className="flex mb-2">
-                    <label htmlFor="sortOrder" className="mr-2">Sort Order:</label>
-                    <select
-                        id="sortOrder"
-                        className="btn btn-outline btn-primary"
-                        value={sortedByPriceAsc ? 'asc' : 'desc'}
-                        onChange={toggleSortOrder}
-                    >
-                        <option value="asc">Ascending</option>
-                        <option value="desc">Descending</option>
-                    </select>
-                </div>
-                <table className="w-full border rounded-lg overflow-hidden">
-                    <thead className="bg-gray-200">
+            <div className="overflow-x-auto w-full">
+                <table className="table">
+                    <thead>
                         <tr>
-                            <th className="px-4 py-2 sm:px-6 sm:py-3 md:py-2 lg:py-3 xl:py-2 text-left">Name</th>
-                            <th className="px-4 py-2 sm:px-6 sm:py-3 md:py-2 lg:py-3 xl:py-2 text-left">Price</th>
-                            <th className="hidden md:table-cell px-4 py-2 sm:px-6 sm:py-3 md:py-2 lg:py-3 xl:py-2 text-left">Quantity</th>
-                            <th className="hidden md:table-cell px-4 py-2 sm:px-6 sm:py-3 md:py-2 lg:py-3 xl:py-2 text-left">Description</th>
-                            <th className="hidden md:table-cell px-4 py-2 sm:px-6 sm:py-3 md:py-2 lg:py-3 xl:py-2 text-left">Seller Name</th>
-                            <th className="hidden md:table-cell px-4 py-2 sm:px-6 sm:py-3 md:py-2 lg:py-3 xl:py-2 text-left">Seller Email</th>
-                            <th className="px-4 py-2 sm:px-6 sm:py-3 md:py-2 lg:py-3 xl:py-2 text-left">Actions</th>
+                            <th>
+                                Index
+                            </th>
+                            <th>Toy Info</th>
+                            <th>Price & Rating</th>
+                            <th>Quantity</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {sortedToys.map(toy => (
+                        {toyData.map((toy, index) => (
                             <tr key={toy._id}>
-                                <td className="px-4 py-3 sm:px-6 sm:py-4 md:py-3 lg:py-4 xl:py-3 whitespace-nowrap">{toy.name}</td>
-                                <td className="px-4 py-3 sm:px-6 sm:py-4 md:py-3 lg:py-4 xl:py-3">${toy.price}</td>
-                                <td className="hidden md:table-cell px-4 py-3 sm:px-6 sm:py-4 md:py-3 lg:py-4 xl:py-3">{toy.availableQuantity}</td>
-                                <td className="hidden md:table-cell px-4 py-3 sm:px-6 sm:py-4 md:py-3 lg:py-4 xl:py-3">{toy.description}</td>
-                                <td className="hidden md:table-cell px-4 py-3 sm:px-6 sm:py-4 md:py-3 lg:py-4 xl:py-3">{toy.sellerName}</td>
-                                <td className="hidden md:table-cell px-4 py-3 sm:px-6 sm:py-4 md:py-3 lg:py-4 xl:py-3">{toy.sellerEmail}</td>
-                                <td className="px-4 py-3 sm:px-6 sm:py-4 md:py-3 lg:py-4 xl:py-3">
-                                    <button
-                                        className={`btn btn-sm ${updateStates[toy._id] ? 'btn-success-disabled' : 'btn-outline btn-success'}`}
-                                        onClick={() => handleUpdateClick(toy._id)}
-                                        disabled={updateStates[toy._id]}
-                                    >
-                                        {updateStates[toy._id] ? 'Updated' : 'Update'}
-                                    </button>
-                                    <button
-                                        onClick={() => handleDelete(toy._id)}
-                                        className='btn btn-sm btn-outline btn-danger my-1'>Delete</button>
+                                <th>
+                                    {index + 1}
+                                </th>
+                                <td>
+                                    <div className="flex items-center gap-3">
+                                        <div className="avatar">
+                                            <div className="mask mask-squircle h-12 w-12">
+                                                <img
+                                                    src={toy.picture}
+                                                    alt={toy.toyName}
+                                                    className="object-cover"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div>
+                                        </div>
+                                    </div>
                                 </td>
+                                <td>
+                                    Price: ${toy.price}
+                                    <br />
+                                    <span className="badge badge-ghost badge-sm">Rating: {toy.rating} stars</span>
+                                </td>
+                                <td>{toy.availableQuantity}</td>
+                                <th className='flex gap-1 flex-wrap'>
+                                    <Link to={`/singletoy/${toy._id}`}  className="btn text-white btn-primary btn-xs">details</Link>
+                                    <Link to={`/dashboard/toy_edit/${toy._id}`} className="btn text-white btn-warning btn-xs">Edit</Link>
+                                    <button onClick={() => handleDelete(toy._id)} className="btn text-white btn-error btn-xs">Delete</button>
+                                </th>
                             </tr>
                         ))}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                Index
+                            </th>
+                            <th>Toy Info</th>
+                            <th>Price & Rating</th>
+                            <th>Quantity</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
     );
-
 };
 
 export default MyToy;

@@ -1,15 +1,24 @@
 import { useState } from 'react';
-import { UserAuth } from '../../provider/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import auth from '../../firebase/firebase.config';
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import GoogleLogin from '../../components/GoogleLogin/GoogleLogin';
+import { toast } from 'react-toastify';
 
 const Register = () => {
-    const { emailSignUp, error } = UserAuth();
-    const [name, setName] = useState('');
-    const [photo, setPhoto] = useState('');
     const [email, setEmail] = useState('');
+    const [displayName, setDisplayName] = useState('');
     const [password, setPassword] = useState('');
     const [validationError, setValidationError] = useState('');
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        ,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth);
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -28,29 +37,54 @@ const Register = () => {
         setValidationError('');
 
         // Submit the form with name, photo, email, and password
-        emailSignUp(email, password, name, photo)
-            .then(() => {
-                // Clear input fields after successful registration
-                setName('');
-                setPhoto('');
-                setEmail('');
-                setPassword('');
+        createUserWithEmailAndPassword(email, password)
+            .then(async (userCredential) => {
+                if (userCredential) {
+                    toast.success('Registration Successful', {
+                        position: toast.POSITION.TOP_CENTER,
+                    });
+                    const userData = {
+                        email: userCredential?.user?.email,
+                        name: displayName,
+                        uid: userCredential?.user?.uid,
+                    };
+
+                    await fetch("http://localhost:5000/user", {
+                        method: "POST",
+                        headers: {
+                            "content-type": "application/json"
+                        },
+                        body: JSON.stringify(userData),
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            localStorage.setItem("token", data?.token);
+                        });
+
+                    setDisplayName('');
+                    setEmail('');
+                    setPassword('');
+                }
             })
             .catch((error) => {
-                // Handle registration error
                 console.error(error);
-                // You can set an error message here if needed
+                setValidationError('Registration failed. Please try again.');
             });
     };
+
+    if (user) {
+        // Redirect to the 'from' route if the user is already authenticated
+        return <Navigate to={from} />;
+    }
 
     return (
         <div>
             <Helmet>
                 <meta charSet="utf-8" />
-                <title>ABC TOYS | Register</title>
+                <title>Deen Inspire | Register</title>
             </Helmet>
             <div className="hero min-h-screen bg-base-200 py-8">
-                <div className="hero-content flex-col lg:flex-row-reverse">
+                <div className="hero-content w-full">
                     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                         <div className="card-body">
                             <form onSubmit={handleSubmit}>
@@ -63,21 +97,8 @@ const Register = () => {
                                         placeholder="name"
                                         name="name"
                                         className="input input-bordered"
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                    />
-                                </div>
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text">Photo Link</span>
-                                    </label>
-                                    <input
-                                        type="text"
-                                        placeholder="photo link"
-                                        name="photo"
-                                        className="input input-bordered"
-                                        value={photo}
-                                        onChange={(e) => setPhoto(e.target.value)}
+                                        value={displayName}
+                                        onChange={(e) => setDisplayName(e.target.value)}
                                     />
                                 </div>
                                 <div className="form-control">
@@ -113,18 +134,17 @@ const Register = () => {
                                 </div>
                                 <div className='my-4'>
                                     <span className="my-4">
-                                        You Have Already Account <Link className="link link-primary" to="/login">Login</Link>
+                                        Already have an account? <Link className="link link-primary" to="/login">Login</Link>
                                     </span>
                                 </div>
                             </form>
                             {validationError && <p className="text-red-500 mt-4">{validationError}</p>}
-                            {error && <p className="text-red-500 mt-4">{error}</p>}
+                            {error && <p className="text-red-500 mt-4">{error.message}</p>}
+                            <span className='text-center font-bold'>or</span>
+                            <GoogleLogin />
                         </div>
                     </div>
                 </div>
-            </div>
-            <div>
-
             </div>
         </div>
     );

@@ -1,11 +1,19 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import { UserAuth } from '../provider/AuthContext';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../firebase/firebase.config';
+import Loading from '../components/Loading';
 
+// eslint-disable-next-line react/prop-types
 const PrivateRoute = ({children}) => {
-    const {user} = UserAuth()
     const location = useLocation()
+    const [user, loading] = useAuthState(auth);
+
+    if(loading){
+        return <Loading/>
+    }
+
     if(!user){
-        return (<Navigate state={{from: location}} to="/login" replace/>)
+        return <Navigate to={"/login"} state={{from : location}} replace/>
     }
     return children
 };

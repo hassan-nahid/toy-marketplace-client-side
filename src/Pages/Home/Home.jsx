@@ -4,7 +4,6 @@ import Gallery from "./Gallery";
 import ReactTabs from "./ReactTabs/ReactTabs";
 import RetailPartners from "./RetailPartners";
 import Support from "./Support";
-// import Slider from "./Slider";
 
 const Home = () => {
     return (
@@ -14,7 +13,6 @@ const Home = () => {
                 <title>ABC TOYS | Home</title>
             </Helmet>
             <Banner></Banner>
-            {/* <Slider></Slider> */}
             <Gallery></Gallery>
             <ReactTabs></ReactTabs>
             <RetailPartners></RetailPartners>
